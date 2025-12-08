@@ -1,4 +1,5 @@
 # 📘 Smart Study Plan Generator
+
 # 🔹 Overview
 
 The Smart Study Plan Generator is an AI-powered project designed to help students create personalized study plans based on their academic profile, learning style, and available free time. The system uses deep learning models to recommend study hours per subject and then maps them into a structured timetable.
