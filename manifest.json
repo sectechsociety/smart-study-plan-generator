@@ -1,0 +1,6 @@
+{
+  "summary": "Notebook path: /mnt/data/pbl study plan generator (2).ipynb\nTotal cells: 13\n\nCell summary (first non-empty line of each cell):\nCell 1: (code) import pandas as pd\nCell 2: (code) from sklearn.compose import ColumnTransformer\nCell 3: (code) import joblib\nCell 4: (code) from sklearn.model_selection import train_test_split\nCell 5: (code) pip install tensorflow\nCell 6: (code) import tensorflow as tf\nCell 7: (code) from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint, ReduceLROnPlateau\nCell 8: (code) from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score\nCell 9: (code) model.save(\"study_plan_model.h5\")  \nCell 10: (code) import joblib\nCell 11: (code) import pandas as pd\nCell 12: (code) import pandas as pd\nCell 13: (code) \n",
+  "created_files": "/mnt/data/study_plan_streamlit_app/app.py\n/mnt/data/study_plan_streamlit_app/requirements.txt\n/mnt/data/study_plan_streamlit_app/README.md",
+  "out_dir": "/mnt/data/study_plan_streamlit_app",
+  "app_file": "/mnt/data/study_plan_streamlit_app/app.py"
+}
