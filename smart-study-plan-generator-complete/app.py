@@ -81,22 +81,42 @@ def distribute_hours(subjects, total_hours):
 
 # ---------------- TIMETABLE ----------------
 def generate_time_slot_timetable(subject_hours, availability, time_slots):
-    blocks = []
-    for subject, hrs in subject_hours.items():
-        blocks.extend([subject] * int(round(hrs)))
-
-    idx = 0
-    table = {slot: {} for slot in time_slots}
-
+    # Collect all available (day, slot) positions
+    available_positions = []
     for day in availability:
         for slot in time_slots:
-            if availability[day][slot] and idx < len(blocks):
-                table[slot][day] = blocks[idx]
-                idx += 1
-            else:
-                table[slot][day] = ""
+            if availability[day][slot]:
+                available_positions.append((day, slot))
 
-    return pd.DataFrame(table).T
+    # Create empty timetable
+    timetable = {slot: {day: "" for day in availability} for slot in time_slots}
+
+    subjects = list(subject_hours.keys())
+    idx = 0
+
+    # 🔹 PHASE 1: Guarantee at least ONE slot per subject
+    for subject in subjects:
+        if idx >= len(available_positions):
+            break
+        day, slot = available_positions[idx]
+        timetable[slot][day] = subject
+        subject_hours[subject] = max(0, subject_hours[subject] - 1)
+        idx += 1
+
+    # 🔹 PHASE 2: Fill remaining slots by difficulty
+    remaining_blocks = []
+    for subject, hrs in subject_hours.items():
+        remaining_blocks.extend([subject] * int(round(hrs)))
+
+    for subject in remaining_blocks:
+        if idx >= len(available_positions):
+            break
+        day, slot = available_positions[idx]
+        timetable[slot][day] = subject
+        idx += 1
+
+    return pd.DataFrame(timetable).T
+
 
 # ---------------- SIDEBAR ----------------
 st.sidebar.title("📘 Smart Study Plan Generator")
@@ -159,8 +179,8 @@ if page == "Input":
 
     st.subheader("🕒 Available Time Slots")
 
-    days = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]
-    time_slots = ["7–8 AM","8–9 AM","9–10 AM","4–5 PM","5–6 PM","6–7 PM"]
+    days = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]
+    time_slots = ["8–10 AM","10–12 AM","1–3 AM","3–5 PM"]
 
     availability = {}
     for d in days:
