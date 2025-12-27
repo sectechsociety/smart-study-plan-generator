@@ -101,11 +101,11 @@ python train_and_export_model.py
 ```
 
 This will create:
-
+```
 model/
  ├── total_hours_model.h5
  └── study_model.h5
-
+```
 #### 5️⃣ Run the Application
 ```
 streamlit run app.py
@@ -189,6 +189,7 @@ This project was developed as a 2-member Team.
 Team Member	Responsibilities
 
 Astle Joe A S	- Neural Network design, model training
+
 Mithik Jain G -	UI development, database integration, authentication
 
 ### 📌 Conclusion
